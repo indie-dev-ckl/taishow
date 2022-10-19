@@ -12,7 +12,7 @@ const Categories = () => {
         Categories
       </h3>
       {categories.map((category)=>(
-        <Link href={category.slug}>
+        <Link href={`/category/${category.slug}`}>
           <span className='block pb-3 mb-3 cursor-pointer'>
           {category.name}  
           </span>

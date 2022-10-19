@@ -1,11 +1,12 @@
-import React, {userContext} from 'react'
+import React, {userContext,useState,useEffect} from 'react'
 import Link from 'next/link';
+import { getCategories } from '../services';
 
-const categories =[
-    {name: 'jazz',slug:'jazz'},
-    {name:'pop',slug: 'pop'}
-]
 const Header = () => {
+    const [categories,setCategories]= useState([]);
+    useEffect(()=>{
+        getCategories().then((newCategories)=>setCategories(newCategories));
+    },[])
   return (
     <div className='container mx-auto px-10 mb-8'>
         <div className='border-b w-full inline-block border-blue-400 py-8'>

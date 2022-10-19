@@ -3,7 +3,9 @@ import moment from 'moment/moment'
 const PostDetail = ({post}) => {
     const getContentFragment = (index, text, obj, type) => {
         let modifiedText = text;
-    
+        
+        console.log("obj: ",obj,'\n');
+        
         if (obj) {
           if (obj.bold) {
             modifiedText = (<b key={index}>{text}</b>);
@@ -15,6 +17,9 @@ const PostDetail = ({post}) => {
     
           if (obj.underline) {
             modifiedText = (<u key={index}>{text}</u>);
+          }
+          if (obj.href){
+            modifiedText = (<a href={obj.href}>{text}</a>);
           }
         }
     
@@ -67,6 +72,7 @@ const PostDetail = ({post}) => {
         <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
         {console.log(post.content.raw)}
         {post.content.raw.children.map((typeObj, index)=>{
+            //console.log(typeObj);
             const children = typeObj.children.map((item, itemIndex)=>getContentFragment(itemIndex, item.text, item))
             return getContentFragment(index, children, typeObj,typeObj.type);
 })}

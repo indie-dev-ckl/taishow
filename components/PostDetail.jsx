@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment/moment'
 import { getText } from 'domutils';
-
+import Image from 'next/image'
 const PostDetail = ({post}) => {
     const getContentFragment2 = (index, obj, type) => {
       let modifiedText = obj.children.map((item)=>item.text);
@@ -11,16 +11,14 @@ const PostDetail = ({post}) => {
           return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
         case 'paragraph':{
           var res=[];
-          obj.children.map((child)=>{
-            console.log("child: ",child,"\n");
+          obj.children.map((child,index)=>{
               switch (child.type){
                 case 'link':
                   const linktext=(child.children.map((ele)=>ele.text))[0]+"\n";
-                  console.log(linktext)
                   res.push( <a href={child.href}><p>{linktext}</p></a>);
                   return;
                 default:
-                  let fragment=<>{child.text}</>
+                  let fragment=<React.Fragment key={index}>{child.text}</React.Fragment>
                   if(child.text==""){
                     //fragment = (<br/>);
                   }
@@ -44,13 +42,14 @@ const PostDetail = ({post}) => {
         }
           
         case 'heading-four':{
-          console.log("mt: ",modifiedText)
+          //console.log("mt: ",modifiedText)
           return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
         }
           
         case 'image':
           return (
-            <img
+            <Image
+              unoptimized
               key={index}
               alt={obj.title}
               height={obj.height}
@@ -62,49 +61,7 @@ const PostDetail = ({post}) => {
           return modifiedText;
       }
     };
-    const getContentFragment = (index, text, obj, type) => {
-        let modifiedText = text;
-        //console.log("text:",modifiedText);
-        //console.log("children: ",children,'\n');
-        
-        if (obj) {
-          if (obj.bold) {
-            modifiedText = (<b key={index}>{text}</b>);
-          }
-    
-          if (obj.italic) {
-            modifiedText = (<em key={index}>{text}</em>);
-          }
-    
-          if (obj.underline) {
-            modifiedText = (<u key={index}>{text}</u>);
-          }
-          
-        }
-    
-        switch (type) {
-          case 'heading-three':
-            return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
-          case 'paragraph':{
-            return <p key={index} className="mb-8">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
-          }
-            
-          case 'heading-four':
-            return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
-          case 'image':
-            return (
-              <img
-                key={index}
-                alt={obj.title}
-                height={obj.height}
-                width={obj.width}
-                src={obj.src}
-              />
-            );
-          default:
-            return modifiedText;
-        }
-      };
+   
   return (
     <>
     <div className="bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8">
@@ -114,8 +71,9 @@ const PostDetail = ({post}) => {
       <div className="px-4 lg:px-0">
         <div className="flex items-center mb-8 w-full">
           <div className="flex md:flex items-center mb-4 lg:mb-0 lg:w-full w-full">
-            <img
+            <Image
               alt={post.author.name}
+              unoptimized
               height="30px"
               width="30px"
               className="align-middle rounded-full"
@@ -132,19 +90,6 @@ const PostDetail = ({post}) => {
         </div>
         <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
         {post.content.raw.children.map((typeObj, index)=>{
-            console.log("\ntype Object: ",typeObj);
-            /*typeObj.children.map((child)=>{
-              if(child.text==""){
-              }
-              else{
-                console.log("child len: ",Object.keys(child).length);
-                console.log("child:", child);
-              }      
-            })*/
-            //if type=paragraph->if children length>1->check type->if type==link do action
-            //else if type==code-block do action
-            /*const children = typeObj.children.map((item, itemIndex)=>getContentFragment(itemIndex, item.text, item))
-            return getContentFragment(index, children, typeObj,typeObj.type);*/
             return getContentFragment2(index,typeObj,typeObj.type);
         })}
       </div>

@@ -34,7 +34,6 @@ const PostWidget = ({ categories, slug }) => {
                 className="align-middle rounded-full"
                 src={post.featuredImage.url}
               />
-              {console.log(post)}
             </div>
             <div className="flex-grow ml-4">
               <p className="text-gray-500 font-xs">{moment(post.date).format('MMM DD, YYYY')}</p>

@@ -33,10 +33,11 @@ const PostWidget = ({ categories, slug }) => {
                 className="align-middle rounded-full"
                 src={post.featuredImage.url}
               />
+              {console.log(post)}
             </div>
             <div className="flex-grow ml-4">
-              <p className="text-gray-500 font-xs">{moment(post.createdAt).format('MMM DD, YYYY')}</p>
-              <Link href={`/post/${post.slug}`} className="text-md" key={index}>{post.title}</Link>
+              <p className="text-gray-500 font-xs">{moment(post.date).format('MMM DD, YYYY')}</p>
+              <Link href={`/post/${post.slug}`} className="text-md " key={index}><button className='hover:bg-gray-300 transition duration-200'>{post.title}</button></Link>
             </div>
           </div>
         ))}

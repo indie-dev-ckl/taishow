@@ -4,34 +4,34 @@ const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 export const getPosts = async () => {
   const query = gql`
-    query MyQuery {
-      postsConnection {
-        edges {
-          cursor
-          node {
-            author {
-              bio
-              name
-              id
-              photo {
-                url
-              }
-            }
-            createdAt
-            slug
-            title
-            excerpt
-            featuredImage {
+  query MyQuery {
+    postsConnection(orderBy: date_ASC) {
+      edges {
+        node {
+          author {
+            bio
+            name
+            id
+            photo {
               url
             }
-            categories {
-              name
-              slug
-            }
           }
+          createdAt
+          slug
+          excerpt
+          title
+          featuredImage {
+            url
+          }
+          categories {
+            name
+            slug
+          }
+          date
         }
       }
     }
+  }
   `;
 
   const result = await request(graphqlAPI, query);
@@ -71,6 +71,7 @@ export const getPostDetails = async (slug) => {
           }
         }
         createdAt
+        date
         slug
         content {
           raw
@@ -99,6 +100,7 @@ export const getSimilarPosts = async (categories, slug) => {
         featuredImage {
           url
         }
+        date
         createdAt
         slug
       }
@@ -121,6 +123,7 @@ export const getAdjacentPosts = async (createdAt, slug) => {
         featuredImage {
           url
         }
+        date
         createdAt
         slug
       }
@@ -133,6 +136,7 @@ export const getAdjacentPosts = async (createdAt, slug) => {
         featuredImage {
           url
         }
+        date
         createdAt
         slug
       }
@@ -238,8 +242,9 @@ export const getRecentPosts = async () => {
   const query = gql`
     query GetPostDetails() {
       posts(
-        orderBy: createdAt_ASC
-        last: 3
+        orderBy: date_ASC,
+        last: 3,
+        where: {date_gte: "today"}
       ) {
         title
         featuredImage {
@@ -247,6 +252,7 @@ export const getRecentPosts = async () => {
         }
         createdAt
         slug
+        date
       }
     }
   `;

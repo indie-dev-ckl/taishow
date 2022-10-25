@@ -2,8 +2,9 @@ import React from 'react'
 import moment from 'moment/moment'
 import { getText } from 'domutils';
 import Image from 'next/image'
+import { RichText } from '@graphcms/rich-text-react-renderer';
 const PostDetail = ({post}) => {
-    const getContentFragment2 = (index, obj, type) => {
+    /*const getContentFragment2 = (index, obj, type) => {
       let modifiedText = obj.children.map((item)=>item.text);
       
       switch (type) {
@@ -59,7 +60,7 @@ const PostDetail = ({post}) => {
         default:
           return modifiedText;
       }
-    };
+    };*/
    
   return (
     <>
@@ -87,9 +88,24 @@ const PostDetail = ({post}) => {
           </div>
         </div>
         <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
-        {post.content.raw.children.map((typeObj, index)=>{
-            return getContentFragment2(index,typeObj,typeObj.type);
-        })}
+        <RichText 
+        content={post.content.raw}
+        renderers={{
+          h1: ({ children }) => <h1 className="text-white">{children}</h1>,
+          bold: ({ children }) => <strong>{children}</strong>,
+          p: ({children}) => <p className='p-3'>{children}</p>,
+          a: ({ children, openInNewTab, href, rel, ...rest }) => {
+              return (
+                <a
+                  href={href}
+                  target={'_blank'}
+                  rel={rel || 'noopener noreferrer'}
+                  className="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  {...rest}
+                >{children}</a>)},
+          }}/>
+        
+        
       </div>
     </div>
 

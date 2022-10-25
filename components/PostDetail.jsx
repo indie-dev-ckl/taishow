@@ -49,7 +49,6 @@ const PostDetail = ({post}) => {
         case 'image':
           return (
             <Image
-              unoptimized
               key={index}
               alt={obj.title}
               height={obj.height}
@@ -73,7 +72,6 @@ const PostDetail = ({post}) => {
           <div className="flex md:flex items-center mb-4 lg:mb-0 lg:w-full w-full">
             <Image
               alt={post.author.name}
-              unoptimized
               height="30px"
               width="30px"
               className="align-middle rounded-full"

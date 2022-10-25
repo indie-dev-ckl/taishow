@@ -3,6 +3,7 @@ import moment from 'moment/moment'
 import { getText } from 'domutils';
 import Image from 'next/image'
 import { RichText } from '@graphcms/rich-text-react-renderer';
+import Link from 'next/link';
 const PostDetail = ({post}) => {
     /*const getContentFragment2 = (index, obj, type) => {
       let modifiedText = obj.children.map((item)=>item.text);
@@ -104,7 +105,10 @@ const PostDetail = ({post}) => {
                   {...rest}
                 >{children}</a>)},
           }}/>
-        
+        {post.categories.map(category => {
+          let link="/category/"+category.slug;
+          return <Link href={link}><a className='ml-4 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-green-700 rounded-full'>#{category.name}</a></Link>
+        })}
         
       </div>
     </div>

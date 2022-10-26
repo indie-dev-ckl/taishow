@@ -2,8 +2,10 @@ import React from 'react'
 import moment from 'moment/moment'
 import { getText } from 'domutils';
 import Image from 'next/image'
+import { RichText } from '@graphcms/rich-text-react-renderer';
+import Link from 'next/link';
 const PostDetail = ({post}) => {
-    const getContentFragment2 = (index, obj, type) => {
+    /*const getContentFragment2 = (index, obj, type) => {
       let modifiedText = obj.children.map((item)=>item.text);
       
       switch (type) {
@@ -49,7 +51,6 @@ const PostDetail = ({post}) => {
         case 'image':
           return (
             <Image
-              unoptimized
               key={index}
               alt={obj.title}
               height={obj.height}
@@ -60,7 +61,7 @@ const PostDetail = ({post}) => {
         default:
           return modifiedText;
       }
-    };
+    };*/
    
   return (
     <>
@@ -73,7 +74,6 @@ const PostDetail = ({post}) => {
           <div className="flex md:flex items-center mb-4 lg:mb-0 lg:w-full w-full">
             <Image
               alt={post.author.name}
-              unoptimized
               height="30px"
               width="30px"
               className="align-middle rounded-full"
@@ -89,9 +89,27 @@ const PostDetail = ({post}) => {
           </div>
         </div>
         <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
-        {post.content.raw.children.map((typeObj, index)=>{
-            return getContentFragment2(index,typeObj,typeObj.type);
+        <RichText 
+        content={post.content.raw}
+        renderers={{
+          h1: ({ children }) => <h1 className="text-white">{children}</h1>,
+          bold: ({ children }) => <strong>{children}</strong>,
+          p: ({children}) => <p className='p-3'>{children}</p>,
+          a: ({ children, openInNewTab, href, rel, ...rest }) => {
+              return (
+                <a
+                  href={href}
+                  target={'_blank'}
+                  rel={'noreferrer'}
+                  className="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  {...rest}
+                >{children}</a>)},
+          }}/>
+        {post.categories.map((category,index) => {
+          let link="/category/"+category.slug;
+          return <Link href={link} key={index}><a className='ml-4 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-green-700 rounded-full'>#{category.name}</a></Link>
         })}
+        
       </div>
     </div>
 

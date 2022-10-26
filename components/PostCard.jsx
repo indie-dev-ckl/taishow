@@ -10,8 +10,7 @@ const PostCard = ({post}) => {
              alt={post.title}
              className="object-top absolute h-80 w-full object-cover shadow-lg rounded-lg
              lg:rounded-lg"
-             layout='fill'
-             unoptimized/>
+             layout='fill'/>
         </div>
         <h1 className='transition duration-200 text-center mb-8 cursor-pointer
         hover:text-pink-600 text-3xl font-semibold'>
@@ -22,7 +21,6 @@ const PostCard = ({post}) => {
         <div className='bloc lg:flex text-center items-center justify-center mb-8 w-full'>
             <div className='flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto mr-8 '>
                 <Image 
-                unoptimized
                 src={post.author.photo.url} 
                 alt={post.author.name} 
                 height="30px"

@@ -100,14 +100,14 @@ const PostDetail = ({post}) => {
                 <a
                   href={href}
                   target={'_blank'}
-                  rel={rel || 'noopener noreferrer'}
+                  rel={'noreferrer'}
                   className="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   {...rest}
                 >{children}</a>)},
           }}/>
-        {post.categories.map(category => {
+        {post.categories.map((category,index) => {
           let link="/category/"+category.slug;
-          return <Link href={link}><a className='ml-4 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-green-700 rounded-full'>#{category.name}</a></Link>
+          return <Link href={link} key={index}><a className='ml-4 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-green-700 rounded-full'>#{category.name}</a></Link>
         })}
         
       </div>

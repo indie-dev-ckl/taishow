@@ -26,6 +26,7 @@ const Header = () => {
                     </Link>
                 ))}
             </div>
+            <a href="https://forms.gle/FB19inK2CuNoU16m9"><button className='btn mx-4'>提交活動資訊</button></a>
         </div>
     </div>
   )

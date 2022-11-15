@@ -20,19 +20,22 @@ export default function AudioBufferOptions(){
                     <p className='dark:text-gray-400 tracking-widest font-bold'>
                         有興趣支持我嘅心血可以follow我嘅IG/Youtube/subscribe patreon
                     </p>
-                    <p className='dark:text-gray-400 tracking-widest font-bold'>
-                        My Patreon:
-                    </p>
-                    <p className='dark:text-gray-400 tracking-widest font-bold'>
-                        My Instagram:
-                    </p>
-                    <p className='dark:text-gray-400 tracking-widest font-bold'>
-                        My Youtube Channel:
-                    </p>
+                    <div className='md:float-left flex md:flex-row m-3'>
+                    <a href="https://www.patreon.com/IndieGuitarTabs?fan_landing=true" className='m-3'>
+                    <button className='btn btn-outline'>My Patreon</button>
+                    </a> 
+                    <a href="https://www.instagram.com/indieguitartabs/" className='m-3'>
+                    <button className='btn btn-outline btn-primary'>My Instagram</button>
+                    </a>   
+                    <a href="https://www.youtube.com/channel/UC41qJ0lGbh9FaJBvA0zSaKw" className='m-3'>
+                    <button className='btn btn-outline btn-error'>My Youtube Channel</button>
+                    </a>  
+                    </div>
+                   
                 </div>
 	        </div>
-            <div className='flex w-auto lg:m-8 self-center items-center content-center '>
-                <YoutubeEmbeded embedId='rokGy0huYEA'/>
+            <div className='w-auto lg:m-8 self-center items-center content-center grid place-items-center'>
+                <YoutubeEmbeded embedId=''/>
             </div>
             
         </div>

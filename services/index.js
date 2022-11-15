@@ -188,23 +188,24 @@ export const getCategoryPost = async (slug) => {
 
 export const getFeaturedPosts = async () => {
   const query = gql`
-    query GetCategoryPost() {
-      posts(where: {featuredPost: true}) {
-        author {
-          name
-          photo {
-            url
-          }
-        }
-        featuredImage {
+  query GetFeaturedPost {
+    posts(where: {featuredPost: true, date_gte: "today"}) {
+      author {
+        name
+        photo {
           url
         }
-        date
-        title
-        slug
-        createdAt
       }
-    }   
+      featuredImage {
+        url
+      }
+      date
+      title
+      slug
+      createdAt
+    }
+  }
+ 
   `;
 
   const result = await request(graphqlAPI, query);

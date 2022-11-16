@@ -1,68 +1,10 @@
-import React from 'react'
-import moment from 'moment/moment'
+import React from 'react';
+import moment from 'moment/moment';
 import { getText } from 'domutils';
-import Image from 'next/image'
+import Image from 'next/image';
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import Link from 'next/link';
-const PostDetail = ({post}) => {
-    /*const getContentFragment2 = (index, obj, type) => {
-      let modifiedText = obj.children.map((item)=>item.text);
-      
-      switch (type) {
-        case 'heading-three':
-          return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
-        case 'paragraph':{
-          var res=[];
-          obj.children.map((child,index)=>{
-              switch (child.type){
-                case 'link':
-                  const linktext=(child.children.map((ele)=>ele.text))[0]+"\n";
-                  res.push( <a href={child.href}><p>{linktext}</p></a>);
-                  return;
-                default:
-                  let fragment=<React.Fragment key={index}>{child.text}</React.Fragment>
-                  if(child.text==""){
-                    //fragment = (<br/>);
-                  }
-                  if (child.bold) {
-                    fragment = (<b>{fragment}</b>);
-                  }
-            
-                  if (child.italic) {
-                    fragment = (<em >{fragment}</em>);
-                  }
-            
-                  if (child.underline) {
-                    fragment = (<u>{fragment}</u>);
-                  }
-                  res.push(<p className='mb-8'>{fragment}</p>);
-                  return;
-              }
-            }
-          )
-          return res;
-        }
-          
-        case 'heading-four':{
-          //console.log("mt: ",modifiedText)
-          return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
-        }
-          
-        case 'image':
-          return (
-            <Image
-              key={index}
-              alt={obj.title}
-              height={obj.height}
-              width={obj.width}
-              src={obj.src}
-            />
-          );
-        default:
-          return modifiedText;
-      }
-    };*/
-   
+const PostDetail = ({post}) => {  
   return (
     <>
     <div className="bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8">

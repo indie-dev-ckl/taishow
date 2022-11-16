@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { YoutubeEmbeded } from '../components'
-export default function AudioBufferOptions(){
+export default function About(){
     return(
         <>
         <div className='container mx-auto px-10 mb-8'>
         <div className="mx:auto px-12 dark:bg-gray-900 dark:text-gray-100">
             <div className='mb-8 md:space-y-0 md:space-x-6 md:flex-row text-3xl font-bold'>關於作者</div>
             <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
-                <img src="https://source.unsplash.com/75x75/?portrait" alt="" className="self-center flex-shrink-0 w-24 h-24 border rounded-full md:justify-self-start dark:bg-gray-500 dark:border-gray-700" />
+                <img src="" alt="" className="self-center flex-shrink-0 w-24 h-24 border rounded-full md:justify-self-start dark:bg-gray-500 dark:border-gray-700" />
                 <div className="flex flex-col space-y-2">
                     <h4 className="text-lg font-semibold text-center md:text-left">Lok</h4>
                     <p className="dark:text-gray-400 tracking-widest">
@@ -54,6 +54,7 @@ export default function AudioBufferOptions(){
                     由於網站內的post都係由我自己手動copy落嚟的,所以可能會有所缺失,如果你係活動搞手,歡迎透過以下方法聯絡我/提交活動資訊:
                 </p>
                 <p className='font-bold text-2xl no-underline hover:underline'><a href='https://forms.gle/FB19inK2CuNoU16m9'>Show 資訊提交站</a></p>
+                <p className='font-bold text-2xl no-underline hover:underline'><a href='https://www.instagram.com/indieguitartabs/'>聯絡我</a></p>
             </div>
         </div>
         </>

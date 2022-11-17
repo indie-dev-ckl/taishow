@@ -1,7 +1,18 @@
 import { request, gql } from 'graphql-request';
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
-
+export const getPostsCount = async()=>{
+  const query= gql`
+  query getPostCount {
+    postsConnection {
+      aggregate {
+        count
+      }
+    }
+  }`
+  const result = await request(graphqlAPI,query)
+  return result;
+}
 export const getPosts = async () => {
   const query = gql`
   query MyQuery {
@@ -38,7 +49,42 @@ export const getPosts = async () => {
 
   return result.postsConnection.edges;
 };
+export const getPostsByPage = async (skip) => {
+  const query = gql`
+  query MyQuery ($skip: Int!) {
+    postsConnection(where: {date_gte: "today"},orderBy: date_ASC,skip: $skip) {
+      edges {
+        node {
+          author {
+            bio
+            name
+            id
+            photo {
+              url
+            }
+          }
+          createdAt
+          slug
+          excerpt
+          title
+          featuredImage {
+            url
+          }
+          categories {
+            name
+            slug
+          }
+          date
+        }
+      }
+    }
+  }
+  `;
 
+  const result = await request(graphqlAPI, query, {skip});
+
+  return result.postsConnection.edges;
+};
 export const getCategories = async () => {
   const query = gql`
     query GetGategories {

@@ -189,7 +189,7 @@ export const getCategoryPost = async (slug) => {
 export const getFeaturedPosts = async () => {
   const query = gql`
   query GetFeaturedPost {
-    posts(where: {featuredPost: true, date_gte: "today"}) {
+    posts(where: {featuredPost: true}) {
       author {
         name
         photo {
@@ -247,7 +247,7 @@ export const getRecentPosts = async () => {
       posts(
         orderBy: date_ASC,
         last: 3,
-        where: {date_gte: "today"}
+        
       ) {
         title
         featuredImage {
